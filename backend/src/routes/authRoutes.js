@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { listProviders, login, me, register, updateProfile } from "../controllers/authController.js";
+import { protect } from "../middleware/auth.js";
+const router = Router();
+router.post("/register", register);
+router.post("/login", login);
+router.get("/me", protect, me);
+router.get("/providers", listProviders);
+router.patch("/profile", protect, updateProfile);
+export default router;
