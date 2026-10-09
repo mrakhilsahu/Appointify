@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { createService, deleteService, listServices, providerServices, updateService } from "../controllers/serviceController.js";
+import { protect, providerOnly } from "../middleware/auth.js";
+const router = Router();
+router.get("/", listServices);
+router.get("/mine", protect, providerOnly, providerServices);
+router.post("/", protect, providerOnly, createService);
+router.put("/:id", protect, providerOnly, updateService);
+router.delete("/:id", protect, providerOnly, deleteService);
+export default router;
