@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { createSlot, deleteSlot, listAvailableProviders, listSlots, providerSlots } from "../controllers/slotController.js";
+import { protect, providerOnly } from "../middleware/auth.js";
+const router = Router();
+router.get("/", listSlots);
+router.get("/availability", listAvailableProviders);
+router.get("/mine", protect, providerOnly, providerSlots);
+router.post("/", protect, providerOnly, createSlot);
+router.delete("/:id", protect, providerOnly, deleteSlot);
+export default router;
